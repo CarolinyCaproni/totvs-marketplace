@@ -88,6 +88,8 @@ Este é o backend da aplicação TOTVS Marketplace, desenvolvido em Java com Spr
 
 - Docker
 - Docker Compose
+- Maven
+- Java
 
 ## ▶️ Como rodar
 1. ```bash
