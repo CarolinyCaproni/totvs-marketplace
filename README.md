@@ -92,9 +92,14 @@ Este é o backend da aplicação TOTVS Marketplace, desenvolvido em Java com Spr
 ## ▶️ Como rodar
 1. ```bash
     # No diretório do projeto backend, execute (ainda mais se fizer alguma alteração):
+    mvn -N io.takari:maven:wrapper
+   ```
+
+2. ```bash
+    # No diretório do projeto backend, execute (ainda mais se fizer alguma alteração):
     ./mvnw clean install -DskipTests
    ```
-2. ```bash
+3. ```bash
     # No diretório do projeto backend, execute:
     docker-compose up --build
     ```
