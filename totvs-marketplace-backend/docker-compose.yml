@@ -1,0 +1,28 @@
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: totvs-spring-boot-backend
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=marketplace-dev
+      - POSTGRES_PASSWORD=marketpass2025
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://totvs-postgres-db:5432/marketplace
+      - SPRING_DATASOURCE_USERNAME=marketplace-dev
+      - SPRING_DATASOURCE_PASSWORD=marketpass2025
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    container_name: totvs-postgres-db
+    environment:
+      - POSTGRES_USER=marketplace-dev
+      - POSTGRES_PASSWORD=marketpass2025
+      - POSTGRES_DB=marketplace
+    ports:
+      - "5432:5432"

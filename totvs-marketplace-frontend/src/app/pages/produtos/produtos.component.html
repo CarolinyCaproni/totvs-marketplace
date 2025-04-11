@@ -1,0 +1,126 @@
+<div class="filtros">
+  <input
+    type="text"
+    [(ngModel)]="filtroNome"
+    (ngModelChange)="buscarProdutos()"
+    placeholder="Buscar por nome"
+  />
+
+  <select [(ngModel)]="filtroCategoriaId" (change)="buscarProdutos()">
+    <option value="">Todas as categorias</option>
+    <option *ngFor="let cat of categorias" [value]="cat.id">
+      {{ cat.nome }}
+    </option>
+  </select>
+</div>
+
+<div class="card-container">
+  <div class="produto-card" *ngFor="let produto of produtos">
+    <div class="card-content">
+      <div *ngIf="!edicoesAtivas[produto.id]; else modoEdicao">
+        <h2>{{ produto.nome }}</h2>
+        <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+        <p><strong>Preço:</strong> R$ {{ produto.preco | number : "1.2-2" }}</p>
+        <p><strong>Estoque:</strong> {{ produto.quantidadeEstoque }}</p>
+        <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
+      </div>
+
+      <ng-template #modoEdicao>
+        <input
+          [(ngModel)]="produtoEditado[produto.id].nome"
+          placeholder="Nome"
+        />
+        <input
+          [(ngModel)]="produtoEditado[produto.id].descricao"
+          placeholder="Descrição"
+        />
+        <input
+          [(ngModel)]="produtoEditado[produto.id].preco"
+          type="number"
+          placeholder="Preço"
+        />
+        <input
+          [(ngModel)]="produtoEditado[produto.id].quantidadeEstoque"
+          type="number"
+          placeholder="Estoque"
+        />
+        <select [(ngModel)]="produtoEditado[produto.id].categoria.id">
+          <option *ngFor="let cat of categorias" [value]="cat.id">
+            {{ cat.nome }}
+          </option>
+        </select>
+      </ng-template>
+    </div>
+
+    <div class="acoes">
+      <ng-container
+        *ngIf="!edicoesAtivas[produto.id]; else botoesSalvarCancelar"
+      >
+        <button (click)="editar(produto)">Editar</button>
+        <button (click)="excluir(produto.id)">Excluir</button>
+      </ng-container>
+
+      <ng-template #botoesSalvarCancelar>
+        <button (click)="salvarEdicao(produto.id)">Salvar</button>
+        <button (click)="cancelarEdicao(produto.id)">Cancelar</button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- Botão flutuante -->
+<button
+  class="botao-flutuante"
+  (click)="mostrarFormulario = !mostrarFormulario"
+>
+  {{ mostrarFormulario ? "Fechar" : "Adicionar Produto" }}
+</button>
+
+<!-- Formulário de criação -->
+<div
+  class="formulario-backdrop"
+  *ngIf="mostrarFormulario"
+  (click)="mostrarFormulario = false"
+></div>
+<div class="formulario-criacao" *ngIf="mostrarFormulario">
+  <h3>Adicionar novo produto</h3>
+
+  <label>
+    Nome:
+    <input [(ngModel)]="novoProduto.nome" placeholder="Nome" />
+  </label>
+
+  <label>
+    Descrição:
+    <input [(ngModel)]="novoProduto.descricao" placeholder="Descrição" />
+  </label>
+
+  <label>
+    Preço:
+    <input [(ngModel)]="novoProduto.preco" type="number" placeholder="Preço" />
+  </label>
+
+  <label>
+    Estoque:
+    <input
+      [(ngModel)]="novoProduto.quantidadeEstoque"
+      type="number"
+      placeholder="Estoque"
+    />
+  </label>
+
+  <label>
+    Categoria:
+    <select [(ngModel)]="novoProduto.categoriaId">
+      <option [value]="0" disabled selected>Selecione uma categoria</option>
+      <option *ngFor="let cat of categorias" [value]="cat.id">
+        {{ cat.nome }}
+      </option>
+    </select>
+  </label>
+
+  <div class="modal-acoes">
+    <button (click)="criarProduto()">Salvar</button>
+    <button (click)="mostrarFormulario = false">Cancelar</button>
+  </div>
+</div>

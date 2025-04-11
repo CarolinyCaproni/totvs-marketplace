@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s;
+  font-family: "Times New Roman", Times, serif;
+}
+
+html,
+body,
+main,
+app-root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: whitesmoke;
+  flex-direction: column;
+}
+
+button {
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &:hover {
+    scale: 1.05;
+  }
+}

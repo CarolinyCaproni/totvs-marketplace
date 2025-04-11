@@ -1,0 +1,61 @@
+:host {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-nova-categoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  input {
+    width: 70%;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  button {
+    border: none;
+    background-color: #077fc4;
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+  }
+}
+
+.categorias-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.categoria-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  width: 200px;
+  height: 100px;
+  background-color: #f2d5c3;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.acoes {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: none;
+    background-color: #077fc4;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+  }
+}

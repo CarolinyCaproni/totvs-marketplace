@@ -1,0 +1,25 @@
+<div class="form-nova-categoria">
+  <input [(ngModel)]="novaCategoria" placeholder="Nova categoria" />
+  <button (click)="criarCategoria()">Criar</button>
+</div>
+
+<!-- Lista de categorias -->
+<div class="categorias-container">
+  <div class="categoria-card" *ngFor="let categoria of categorias">
+    <ng-container *ngIf="!edicoesAtivas[categoria.id]; else edicao">
+      <span>{{ categoria.nome }}</span>
+      <div class="acoes">
+        <button (click)="editar(categoria)">Editar</button>
+        <button (click)="excluir(categoria.id)">Deletar</button>
+      </div>
+    </ng-container>
+
+    <ng-template #edicao>
+      <input [(ngModel)]="categoriaEditada[categoria.id]" />
+      <div class="acoes">
+        <button (click)="salvarEdicao(categoria.id)">Salvar</button>
+        <button (click)="cancelarEdicao(categoria.id)">Cancelar</button>
+      </div>
+    </ng-template>
+  </div>
+</div>
